@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { IconContext } from 'react-icons'
+import { FaAngleDown } from 'react-icons/fa'
 
 function Dropdown({ items, dropdown, setIsOpenDropdown, onChange }) {
   const selectedItem = items.find(item => item.selected)
@@ -16,18 +18,19 @@ function Dropdown({ items, dropdown, setIsOpenDropdown, onChange }) {
           type="button"
         >
           { selectedItem.title }
-          <svg className="-mr-1 ml-2 h-5 w-5 absolute right-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              fillRule="evenodd"
-              clipRule="evenodd"
-            />
-          </svg>
+          <IconContext.Provider value={{ className: "-mr-1 ml-2 h-5 w-5 absolute right-2 text-gray-300 text-xs" }}>
+            <FaAngleDown />
+          </IconContext.Provider>
         </button>
       </div>
 
       { dropdown.isOpen &&
-        <div className="origin-top-right absolute z-50 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+        <div
+          className="origin-top-right absolute z-50 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
+          aria-labelledby="options-menu"
+          aria-orientation="vertical"
+          role="menu"
+        >
           {items.map(item => {
             return (
               <div className="py-1" key={item.id}>
